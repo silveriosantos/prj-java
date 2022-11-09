@@ -17,20 +17,20 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository uRepository;
 
-
     @PostMapping("/add")
     public @ResponseBody String addUsuario(
             @RequestParam String name,
-            @RequestParam String email){
-                Usuario objU = new Usuario();
-                objU.setName(name);
-                objU.setEmail(email);
-                return "Salvo";
-            }
+            @RequestParam String email) {
+        Usuario objU = new Usuario();
+        objU.setName(name);
+        objU.setEmail(email);
+        uRepository.save(objU);
+        return "Salvo";
+    }
 
-            @GetMapping("/all")
-            public @ResponseBody Iterable<Usuario> BuscarUsuario(){
-                return uRepository.findAll();
-            }
-        
-        }
+    @GetMapping("/all")
+    public @ResponseBody Iterable<Usuario> BuscarUsuarios() {
+        return uRepository.findAll();
+    }
+
+}
